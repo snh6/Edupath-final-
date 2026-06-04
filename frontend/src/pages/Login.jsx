@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
  
-const API = 'https://edupath-api-7ct9.onrender.com/'
+const API = 'https://edupath-api-7ct9.onrender.com'
  
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false)
