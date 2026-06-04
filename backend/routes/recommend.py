@@ -30,16 +30,23 @@ async def recommend(data: QuizSubmit):
     # Sort by ranking
     filtered.sort(key=lambda x: x["ranking"])
  
-    # Score based compatibility
+    # Score based compatibility AND recommendation quality
     if data.score >= 16:
         compatibility = "Excellent Match"
+        # High scorers get top ranked colleges
+        recommended = filtered[:3]
     elif data.score >= 10:
         compatibility = "Good Match"
+        # Mid scorers get colleges with rating >= 9.0
+        recommended = [c for c in filtered if c["rating"] >= 9.0][:3]
+        if not recommended:
+            recommended = filtered[:3]
     else:
         compatibility = "Moderate Match"
- 
-    # Always return top 3
-    recommended = filtered[:3]
+        # Low scorers get colleges with lower fees first
+        recommended = sorted(filtered, key=lambda x: x["fees"])[:3]
+        if not recommended:
+            recommended = filtered[:3]
  
     return {
         "score": data.score,
