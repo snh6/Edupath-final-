@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
  
-const API = 'http://127.0.0.1:8000'
+const API = 'https://edupath-api-7ct9.onrender.com/'
  
 export default function Quiz() {
   const [questions, setQuestions] = useState([])
